@@ -38,8 +38,10 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/main.h" />
+		<Unit filename="include/matrix_multiplication.h" />
 		<Unit filename="include/merge_sort.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/matrix_multiplication.cpp" />
 		<Unit filename="src/merge_sort.cpp" />
 		<Extensions>
 			<code_completion />

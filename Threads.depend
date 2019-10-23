@@ -1,14 +1,23 @@
 # depslib dependency file v1.0
-1571856573 source:/home/mohamed/Desktop/Threads/src/main.cpp
+1571869666 source:/home/mohamed/Desktop/Threads/src/main.cpp
 	"main.h"
 	"merge_sort.h"
+	"matrix_multiplication.h"
 	<iostream>
 
 1571847874 /home/mohamed/Desktop/Threads/include/main.h
 
 1571856684 /home/mohamed/Desktop/Threads/include/merge_sort.h
 
-1571857001 source:/home/mohamed/Desktop/Threads/src/merge_sort.cpp
+1571858816 /home/mohamed/Desktop/Threads/include/matrix_multiplication.h
+
+1571871420 source:/home/mohamed/Desktop/Threads/src/matrix_multiplication.cpp
+	"matrix_multiplication.h"
+	<vector>
+	<iostream>
+	<time.h>
+
+1571859076 source:/home/mohamed/Desktop/Threads/src/merge_sort.cpp
 	"merge_sort.h"
 	<iostream>
 	<pthread.h>

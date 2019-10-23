@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const char* FILE_PATH = "merge-sort-readme.txt";
+const char* FILE_PATH = "merge-sort-input.txt";
 const int THREADS_BRANCHES = 2;
 
 vector<int> unsorted_array;
