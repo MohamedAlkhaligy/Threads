@@ -25,6 +25,12 @@ merge_sort::~merge_sort()
 void* mergeSortThreads(void *arguments);
 void merge_partitions(int low, int mid, int high);
 
+/**
+* This function initializes the unsorted array
+* from a file, starts the main thread of the merge
+* sort & finally when merge sort is completed, it
+* prints out the sorted array in the console.
+*/
 void merge_sort::mergeSortInitialize() {
 
     freopen(FILE_PATH, "r", stdin);
@@ -51,6 +57,13 @@ void merge_sort::mergeSortInitialize() {
     fclose(stdin);
 }
 
+/**
+* The basic function of the merge sort which "DIVIDES"
+* the array into separate solvable parts and then solve
+* -CONQUER- each part in a different thread.
+* @param arguments which are pointers to the start and end
+* indicies of the solvable parts.
+*/
 void* mergeSortThreads(void *arguments) {
 
     pair<int, int> range = *((pair<int, int>*) arguments);
@@ -75,6 +88,13 @@ void* mergeSortThreads(void *arguments) {
     return 0;
 }
 
+/**
+* This functions merges -COMBINES- the solved/sorted
+* partitions into one array and then adjust part of the
+* main unsorted array.
+* @param low, mid & high are the boundaries of the 2
+* arrays to be merged.
+*/
 void merge_partitions(int low, int mid, int high) {
     vector<int> sorted_array(high - low + 1, 0);
     int index = 0;

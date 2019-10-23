@@ -18,7 +18,7 @@ pair<int, int> sizeB;
 pair<int, int> readMatrix(vector <vector<int> > &);
 void writeFile(pair<clock_t, clock_t>, bool);
 void* elementMatrixMultiplicationThread(void*);
-void* rowMatrixMultiplication(void* arguments);
+void* rowMatrixMultiplicationThread(void* arguments);
 pair<clock_t, clock_t> elementMatrixMultiplication();
 pair<clock_t, clock_t> rowMatrixMultiplication();
 
@@ -30,6 +30,11 @@ matrix_multiplication::~matrix_multiplication()
 {
 }
 
+/**
+* mutliplicationInitialze is responsible for calling
+* main functionalities, in which it reads from a file, computes the matrix
+* multiplication & finally save the results in an output file.
+*/
 void matrix_multiplication::multiplicationInitialize() {
 
     freopen(INPUT_FILE, "r", stdin);
@@ -46,6 +51,10 @@ void matrix_multiplication::multiplicationInitialize() {
     fclose(stdin);
 }
 
+/**
+* Read from a file the values of a given matrix
+* @param matrix to be written.
+*/
 pair<int, int> readMatrix(vector <vector<int> > &matrix) {
     int row, column;
     cin >> row >> column;
@@ -60,6 +69,13 @@ pair<int, int> readMatrix(vector <vector<int> > &matrix) {
     return make_pair(row, column);
 }
 
+/**
+* Write the output of the matrix multiplication in a file.
+* @param timeRange is the time elapsed for each matrix multiplication
+* algorithm.
+* @param isRecreate; if true neglect file if exists and create a new file
+* else append contents (might create a new file if there isn't a file).
+*/
 void writeFile(pair<clock_t, clock_t> timeRange, bool isRecreate) {
     freopen(OUTPUT_FILE, ((isRecreate) ? "w": "a+"), stdout);
     for (int i = 0; i < sizeA.first; i++) {
@@ -72,6 +88,11 @@ void writeFile(pair<clock_t, clock_t> timeRange, bool isRecreate) {
     fclose(stdout);
 }
 
+/**
+* Computes matrix multiplication for every element of the
+* output matrix concurrently using threads.
+* @return the time elapsed to complete computation.
+*/
 pair<clock_t, clock_t> elementMatrixMultiplication() {
 
     pthread_t threads[sizeA.first][sizeB.second];
@@ -107,6 +128,11 @@ void* elementMatrixMultiplicationThread(void* arguments) {
     return 0;
 }
 
+/**
+* Computes matrix multiplication for every row of the
+* output matrix concurrently using threads.
+* @return the time elapsed to complete computation.
+*/
 pair<clock_t, clock_t> rowMatrixMultiplication() {
 
     pthread_t threads[sizeA.first];
@@ -118,7 +144,7 @@ pair<clock_t, clock_t> rowMatrixMultiplication() {
     for (int i = 0; i < sizeA.first; i++) {
         int* index = new int;
         *index = i;
-        pthread_create(&threads[i], NULL, rowMatrixMultiplication, index);
+        pthread_create(&threads[i], NULL, rowMatrixMultiplicationThread, index);
     }
 
     for (int i = 0; i < sizeA.first; i++) {
@@ -130,7 +156,7 @@ pair<clock_t, clock_t> rowMatrixMultiplication() {
     return make_pair(timeBefore, timeAfter);
 }
 
-void* rowMatrixMultiplication(void* arguments) {
+void* rowMatrixMultiplicationThread(void* arguments) {
 
     int index = *((int*) arguments);
 

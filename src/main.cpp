@@ -18,7 +18,7 @@ main::~main()
 int main() {
 
     merge_sort instance_sort;
-    //instance_sort.mergeSortInitialize();
+    instance_sort.mergeSortInitialize();
 
     matrix_multiplication instance_multiplication;
     instance_multiplication.multiplicationInitialize();
