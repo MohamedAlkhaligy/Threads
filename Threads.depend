@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1571856573 source:/home/mohamed/Desktop/Threads/src/main.cpp
+	"main.h"
+	"merge_sort.h"
+	<iostream>
+
+1571847874 /home/mohamed/Desktop/Threads/include/main.h
+
+1571856684 /home/mohamed/Desktop/Threads/include/merge_sort.h
+
+1571857001 source:/home/mohamed/Desktop/Threads/src/merge_sort.cpp
+	"merge_sort.h"
+	<iostream>
+	<pthread.h>
+	<string>
+	<stdio.h>
+	<vector>
+
