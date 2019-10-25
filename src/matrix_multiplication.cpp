@@ -54,13 +54,14 @@ void matrix_multiplication::multiplicationInitialize() {
 /**
 * Read from a file the values of a given matrix
 * @param matrix to be written.
+* @return number of rows and columns.
 */
 pair<int, int> readMatrix(vector <vector<int> > &matrix) {
     int row, column;
     cin >> row >> column;
 
     for (int i = 0; i < row; i++) {
-        vector<int> rowVector(row, 0);
+        vector<int> rowVector(column);
         for (int j = 0; j < column; j++) {
             cin >> rowVector[j];
         }
@@ -73,7 +74,7 @@ pair<int, int> readMatrix(vector <vector<int> > &matrix) {
 * Write the output of the matrix multiplication in a file.
 * @param timeRange is the time elapsed for each matrix multiplication
 * algorithm.
-* @param isRecreate; if true neglect file if exists and create a new file
+* @param isRecreate; if true neglect file if exists and create(overwrite) a new file
 * else append contents (might create a new file if there isn't a file).
 */
 void writeFile(pair<clock_t, clock_t> timeRange, bool isRecreate) {
@@ -118,6 +119,12 @@ pair<clock_t, clock_t> elementMatrixMultiplication() {
     return make_pair(timeBefore, timeAfter);
 }
 
+/**
+* elementMatrixMultiplicationThread is called as a thread that handles
+* matrix multiplication for every element of the output matrix.
+* @param arguments are pointers to the required indicies in matrix
+* multiplication.
+*/
 void* elementMatrixMultiplicationThread(void* arguments) {
 
     pair<int, int> index = *((pair<int, int>*) arguments);
@@ -156,6 +163,12 @@ pair<clock_t, clock_t> rowMatrixMultiplication() {
     return make_pair(timeBefore, timeAfter);
 }
 
+/**
+* rowMatrixMultiplicationThread is called as a thread that handles
+* matrix multiplication for every row of the output matrix.
+* @param arguments are pointers to the required indicies in matrix
+* multiplication.
+*/
 void* rowMatrixMultiplicationThread(void* arguments) {
 
     int index = *((int*) arguments);
