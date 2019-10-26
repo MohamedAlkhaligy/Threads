@@ -42,6 +42,12 @@ void matrix_multiplication::multiplicationInitialize() {
     sizeA = readMatrix(matrixA);
     sizeB = readMatrix(matrixB);
 
+    if (sizeA.second != sizeB.first) {
+        cout << "Number of columns of the first matrix should be equal\n"
+                "to the number of rows of the second matrix" << endl;
+        return;
+    }
+
     pair<clock_t, clock_t> timeRange = elementMatrixMultiplication();
     writeFile(timeRange, true);
 
